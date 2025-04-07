@@ -127,7 +127,7 @@ class LinearRegressionModel:
                          (row['# Date'], row['Predicted_Receipt_Count']),
                          textcoords="offset points", xytext=(0, 10), ha='center', fontsize=8, color='darkgreen')
 
-        plt.title(f'Torch Linear Regression (lr={self.learning_rate}, epochs={self.epochs})')
+        plt.title(f'Linear Regression (lr={self.learning_rate}, epochs={self.epochs})')
         plt.xlabel('Date')
         plt.ylabel('Receipt Count')
         plt.legend()
