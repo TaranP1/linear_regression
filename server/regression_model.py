@@ -77,10 +77,6 @@ class LinearRegressionModel:
             preds_scaled = self.model(self.x_val)
             mse_val_scaled = self.criteria(preds_scaled, self.y_val).item()
 
-            # Inverse transform predictions and ground truth for R²
-            preds_unscaled = self.scaler_receipt.inverse_transform(preds_scaled.numpy())
-            actuals_unscaled = self.scaler_receipt.inverse_transform(self.y_val.numpy())
-
         return mse_val_scaled
 
     def visualize_data(self):
@@ -119,7 +115,7 @@ class LinearRegressionModel:
         plt.plot(pd.to_datetime(self.min_date) + pd.to_timedelta(x_orig.flatten(), unit='D'), y_orig, color='red', label='Fitted Line')
         plt.scatter(future_df['# Date'], future_df['Predicted_Receipt_Count'], color='purple', label='Future Prediction', marker='x', s=10)
 
-        # Annotate start of each future month
+        # Label start of each future month
         future_df['Month'] = future_df['# Date'].dt.to_period('M')
         monthly_labels_df = future_df.groupby('Month').first().reset_index()
         for _, row in monthly_labels_df.iterrows():
